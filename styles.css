@@ -405,3 +405,51 @@ body.modo-claro .links a:hover {
 #whatsappBtn:hover {
   background: #1ebe5d;
 }
+
+MEJORAS SOLO PARA MÓVIL
+========================= */
+@media screen and (max-width: 768px) {
+
+  /* HERO más compacto */
+  .hero-rect {
+    height: 250px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  /* Servicios en columna */
+  .grid-productos {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card-producto {
+    padding: 20px;
+  }
+
+  /* Imágenes un poco más pequeñas */
+  .img-producto {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* Botón WhatsApp más grande para dedo */
+  #whatsappBtn {
+    width: 90%;
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  /* Pago móvil más compacto */
+  .panel.independiente {
+    margin: 15px auto 30px auto;
+    padding: 20px;
+  }
+
+}
