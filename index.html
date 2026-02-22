@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Eiko Digital</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+  <!-- MENÚ FUTURISTA -->
+  <nav class="menu">
+  <div class="logo-container">
+    <img src="ED.png" alt="Logo ED" class="logo-ed">
+    <div class="logo-texto">Eiko Digital</div>
+  </div>
+
+
+    <label class="switch">
+      <input type="checkbox" id="modo-btn">
+      <span class="slider"></span>
+    </label>
+  </nav>
+
+  <!-- HERO -->
+  <div class="interfaz-superior">
+    <div class="hero-rect">
+      <img src="3348264.jpg" alt="Hero Futurista">
+      <div class="contenido-arriba">
+        <h1>Eiko Digital</h1>
+        <p>Tus mejores plataformas en el mismo sitio al mejor precio.</p>
+       
+      </div>
+    </div>
+  </div>
+
+<div class="flecha-neon-gaming">
+  <svg width="60" height="60" viewBox="0 0 24 24">
+    <defs>
+      <linearGradient id="gradNeon" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#ff00ff"/>
+        <stop offset="100%" stop-color="#00ffff"/>
+      </linearGradient>
+    </defs>
+    <path d="M12 2 L12 18 M12 18 L6 12 M12 18 L18 12" stroke="url(#gradNeon)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</div>
+<section class="productos">
+  <h2 class="titulo-seccion">Nuestros Servicios</h2>
+
+  <div class="grid-productos">
+
+    <div class="card-producto" data-name="Netflix" data-price="5">
+      <img src="netflix.png" alt="Netflix" class="img-producto">
+      <h3>Netflix</h3>
+      <p>5$ BCV</p>
+    </div>
+
+    <div class="card-producto" data-name="Prime Video" data-price="3">
+      <img src="primevideo.png" alt="Prime Video" class="img-producto">
+      <h3>Prime Video</h3>
+      <p>3$ BCV</p>
+    </div>
+
+    <div class="card-producto" data-name="HBO Max" data-price="3">
+      <img src="hbo.png" alt="HBO Max" class="img-producto">
+      <h3>HBO Max</h3>
+      <p>3$ BCV</p>
+    </div>
+
+    <div class="card-producto" data-name="Crunchyroll" data-price="3">
+      <img src="crunchyroll.png" alt="Crunchyroll" class="img-producto">
+      <h3>Crunchyroll</h3>
+      <p>3$ BCV</p>
+    </div>
+
+    <div class="card-producto" data-name="Paramount+" data-price="2.5">
+      <img src="paramount.png" alt="Paramount+" class="img-producto">
+      <h3>Paramount+</h3>
+      <p>2.5$ BCV</p>
+    </div>
+
+    <div class="card-producto" data-name="Vix Premium" data-price="2.5">
+      <img src="vix.png" alt="Vix Premium" class="img-producto">
+      <h3>Vix Premium</h3>
+      <p>2.5$ BCV</p>
+    </div>
+
+  </div>
+
+  <div class="total-box">
+    <h3>Total: $<span id="total">0</span> BCV</h3>
+   <a id="whatsappBtn" target="_blank">
+  <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+</a></div>
+
+</section>
+
+
+
+<script>
+const cards = document.querySelectorAll(".card-producto");
+const totalElement = document.getElementById("total");
+const whatsappBtn = document.getElementById("whatsappBtn");
+
+let total = 0;
+let selected = [];
+
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    const price = parseFloat(card.dataset.price);
+    const name = card.dataset.name;
+
+    if (card.classList.contains("active")) {
+      card.classList.remove("active");
+      total -= price;
+      selected = selected.filter(item => item !== `${name} ($${price})`);
+    } else {
+      card.classList.add("active");
+      total += price;
+      selected.push(`${name} ($${price})`);
+    }
+
+    totalElement.textContent = total.toFixed(2);
+  });
+});
+
+whatsappBtn.addEventListener("click", () => {
+  if (selected.length === 0) {
+    alert("Selecciona al menos un servicio");
+    return;
+  }
+
+  const mensaje = `Hola, quiero comprar:\n\n${selected.join("\n")}\n\nTotal: $${total.toFixed(2)} BCV`;
+  const numero = "+5804123663442"; // Cambia esto
+  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+  
+  whatsappBtn.href = url;
+});
+</script>
+
+  </div>
+</section>
+<!-- PAGO MÓVIL -->
+  <div class="panel independiente" id="contacto">
+    <h2>Pago Móvil</h2>
+    
+<div class="datos-banco">
+      <p><strong>Bancamiga 0172</strong></p>
+      <img src="https://asobanca.com.ve/wp-content/uploads/2024/11/Bancamiga.png" 
+           alt="Bancamiga" class="icono-banco">
+    </div>
+
+    <p>Cédula: 27474295</p>
+    <p>Teléfono: 04123663442</p>
+
+      </div>
+
+  <!-- ICONOS REDES SOCIALES -->
+  <a href="https://wa.me/+5804123663442" class="whatsapp-btn" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" />
+  </a>
+
+  <a href="https://instagram.com/andresmf777" class="instagram-btn" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+  </a>
+
+  <a href="https://facebook.com/tu_usuario" class="facebook-btn" target="_blank">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" alt="Facebook" />
+  </a>
+
+  <!-- SCRIPT: MODO OSCURO / CLARO -->
+  <script>
+    const switchBtn = document.getElementById('modo-btn');
+    switchBtn.addEventListener('change', () => {
+      document.body.classList.toggle('modo-claro');
+    });
+  </script>
+
+</body>
+</html>
