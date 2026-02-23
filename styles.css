@@ -454,4 +454,9 @@ MEJORAS SOLO PARA MÓVIL
 
 }
 
-   
+   .tasa-bcv {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #00ffcc;
+  text-shadow: 0 0 6px #00ffcc;
+}
