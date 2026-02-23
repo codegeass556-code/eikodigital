@@ -491,17 +491,3 @@ MEJORAS SOLO PARA MÓVIL
   display: block;
 }
 
-.contenido-arriba p {
-  font-weight: 600;
-  color: #ffffff;
-
-  /* Borde del texto (stroke) */
-  -webkit-text-stroke: 1px #7c7cff;
-
-  /* Glow neón */
-  text-shadow:
-    0 0 5px #7c7cff,
-    0 0 10px #7c7cff,
-    0 0 20px #00ffff,
-    0 0 35px #00ffff;
-}
