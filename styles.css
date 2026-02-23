@@ -492,15 +492,11 @@ MEJORAS SOLO PARA MÓVIL
   display: none;
 }
 
-/* En móvil */
-@media screen and (max-width: 768px) {
-
-  .hero-pc {
-    display: none;
-  }
+(max-width: 768px) {
 
   .hero-mobile {
-    display: block;
+    object-fit: contain;
+    background-color: #0b0b12; /* opcional para que no se vea vacío */
   }
 
 }
