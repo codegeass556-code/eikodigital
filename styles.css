@@ -158,6 +158,14 @@ body {
   gap: 15px;
 }
 
+/* 📱 Imagen diferente solo en móvil */
+@media screen and (max-width: 768px) {
+  .hero {
+    background: url("img/personajestv.png") no-repeat center center/cover;
+    height: 100vh;
+  }
+}
+
 h1 {
   font-size: 3rem;
   text-shadow: 0 0 20px #7c7cff;
@@ -447,14 +455,21 @@ MEJORAS SOLO PARA MÓVIL
   }
 
   /* Pago móvil más compacto */
-  .panel.independiente {
-    margin: 15px auto 30px auto;
-    padding: 20px;
+  .panel.independiente#contacto {
+  margin-top: -50px;  /* sube la sección unos centímetros */
+  max-width: 300px;
+}
+
+/* Ajuste en móvil para que no quede demasiado pegada */
+@media screen and (max-width: 768px) {
+  .panel.independiente#contacto {
+    margin-top: -20px;
   }
+}
 
 }
 
-   .tasa-bcv {
+  .tasa-bcv {
   margin-top: 8px;
   font-size: 0.9rem;
   color: #00ffcc;
