@@ -49,67 +49,60 @@
   </svg>
 </div>
 <section class="productos">
+  <section class="productos">
   <h2 class="titulo-seccion">Nuestros Servicios</h2>
 
   <div class="grid-productos">
-
-    <!-- PRODUCTO 1 - NETFLIX -->
     <div class="card-producto">
       <img src="netflix.png" alt="Netflix" class="img-producto">
       <h3>Netflix</h3>
       <p data-precio="5">$5 USD</p>
     </div>
 
-    <!-- PRODUCTO 2 - PRIME VIDEO -->
     <div class="card-producto">
       <img src="primevideo.png" alt="Prime Video" class="img-producto">
       <h3>Prime Video</h3>
       <p data-precio="3">$3 USD</p>
     </div>
 
-    <!-- PRODUCTO 3 - HBO MAX -->
     <div class="card-producto">
       <img src="hbo.png" alt="HBO Max" class="img-producto">
       <h3>HBO Max</h3>
       <p data-precio="3">$3 USD</p>
     </div>
 
-    <!-- PRODUCTO 4 - CRUNCHYROLL -->
     <div class="card-producto">
       <img src="crunchyroll.png" alt="Crunchyroll" class="img-producto">
       <h3>Crunchyroll</h3>
       <p data-precio="3">$3 USD</p>
     </div>
 
-    <!-- PRODUCTO 5 - PARAMOUNT+ -->
     <div class="card-producto">
       <img src="paramount.png" alt="Paramount+" class="img-producto">
       <h3>Paramount+</h3>
       <p data-precio="2.5">$2.5 USD</p>
     </div>
 
-    <!-- PRODUCTO 6 - VIX PREMIUM -->
     <div class="card-producto">
       <img src="vix.png" alt="Vix Premium" class="img-producto">
       <h3>Vix Premium</h3>
       <p data-precio="2.5">$2.5 USD</p>
     </div>
-
   </div>
 
-  <!-- TOTAL -->
   <div class="total-box">
     <h3>Total: $<span id="total">0</span> USD</h3>
     <p>Total en Bs: <span id="totalBs">0</span> Bs</p>
     <p class="tasa-bcv">Tasa BCV del dólar: <span id="valorBCV">405.351</span> Bs</p>
-    <a id="whatsappBtn" target="_blank" href="https://wa.me/+5804123663442?text=Hola">
-      <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+
+    <a id="whatsappBtn" target="_blank">
+      <i class="fab fa-whatsapp"></i> Confirmar Pago por WhatsApp
     </a>
+
     <button id="resetBtn" class="boton-futuro" style="margin-top:20px;">Reset</button>
   </div>
 </section>
 
-<!-- JAVASCRIPT PARA SUMA + TOGGLE + RESET -->
 <script>
 let total = 0;
 const tasaBCV = parseFloat(document.getElementById("valorBCV").textContent);
@@ -117,9 +110,16 @@ const tasaBCV = parseFloat(document.getElementById("valorBCV").textContent);
 const totalElement = document.getElementById("total");
 const totalBsElement = document.getElementById("totalBs");
 const resetBtn = document.getElementById("resetBtn");
-
+const whatsappBtn = document.getElementById("whatsappBtn");
 const productos = document.querySelectorAll(".card-producto");
 
+// Función para actualizar totales
+function actualizarTotales() {
+  totalElement.textContent = total.toFixed(2);
+  totalBsElement.textContent = (total * tasaBCV).toFixed(2);
+}
+
+// Toggle selección/deselección
 productos.forEach(producto => {
   producto.addEventListener("click", function() {
     const p = producto.querySelector("p[data-precio]");
@@ -127,7 +127,6 @@ productos.forEach(producto => {
     const precio = parseFloat(p.dataset.precio);
     if (isNaN(precio)) return;
 
-    // Toggle: suma o resta
     if (producto.classList.contains("active")) {
       total -= precio;
       producto.classList.remove("active");
@@ -136,62 +135,47 @@ productos.forEach(producto => {
       producto.classList.add("active");
     }
 
-    totalElement.textContent = total.toFixed(2);
-    totalBsElement.textContent = (total * tasaBCV).toFixed(2);
+    actualizarTotales();
   });
 });
 
 // Botón Reset
 resetBtn.addEventListener("click", function() {
   total = 0;
-  totalElement.textContent = total.toFixed(2);
-  totalBsElement.textContent = (total * tasaBCV).toFixed(2);
   productos.forEach(p => p.classList.remove("active"));
+  actualizarTotales();
 });
-</script>
 
+// WhatsApp dinámico con mensaje completo
+whatsappBtn.addEventListener("click", function(e) {
+  e.preventDefault();
 
-<script>
-const cards = document.querySelectorAll(".card-producto");
-const totalElement = document.getElementById("total");
-const whatsappBtn = document.getElementById("whatsappBtn");
+  const seleccionados = [];
 
-let total = 0;
-let selected = [];
-
-cards.forEach(card => {
-  card.addEventListener("click", () => {
-    const price = parseFloat(card.dataset.price);
-    const name = card.dataset.name;
-
-    if (card.classList.contains("active")) {
-      card.classList.remove("active");
-      total -= price;
-      selected = selected.filter(item => item !== `${name} ($${price})`);
-    } else {
-      card.classList.add("active");
-      total += price;
-      selected.push(`${name} ($${price})`);
+  productos.forEach(p => {
+    if (p.classList.contains("active")) {
+      const nombre = p.querySelector("h3").textContent;
+      const precio = parseFloat(p.querySelector("p[data-precio]").dataset.precio).toFixed(2);
+      const precioBs = (precio * tasaBCV).toFixed(2);
+      seleccionados.push(`${nombre} - $${precio} USD (${precioBs} Bs)`);
     }
-
-    totalElement.textContent = total.toFixed(2);
   });
-});
 
-whatsappBtn.addEventListener("click", () => {
-  if (selected.length === 0) {
-    alert("Selecciona al menos un servicio");
+  if (seleccionados.length === 0) {
+    alert("Selecciona al menos un producto antes de enviar por WhatsApp.");
     return;
   }
 
-  const mensaje = `Hola, quiero comprar:\n\n${selected.join("\n")}\n\nTotal: $${total.toFixed(2)} BCV`;
-  const numero = "+5804123663442"; // Cambia esto
-  const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
-  
-  whatsappBtn.href = url;
+  // MENSAJE FINAL
+  const mensaje = `Hola, quiero comprar:\n${seleccionados.join("\n")}\n\nTotal: $${total.toFixed(2)} USD (${(total * tasaBCV).toFixed(2)} Bs)`;
+
+  const numeroWhatsApp = "5804123663442"; // tu número real en formato internacional
+  const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+  window.open(url, "_blank");
 });
 </script>
 
+  
   </div>
 </section>
 <!-- PAGO MÓVIL -->

@@ -191,9 +191,9 @@ p {
    PRODUCTOS
 ========================= */
 .productos {
-  padding: 60px 20px;
+  padding: 30px 30px 60px 30px; /* menos espacio arriba */
+  margin-top: -40px; /* sube la sección unos centímetros */
 }
-
 .titulo-seccion {
   font-size: 2rem;
   margin-bottom: 40px;
