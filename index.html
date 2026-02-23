@@ -53,55 +53,102 @@
 
   <div class="grid-productos">
 
-    <div class="card-producto" data-name="Netflix" data-price="5">
+    <!-- PRODUCTO 1 - NETFLIX -->
+    <div class="card-producto">
       <img src="netflix.png" alt="Netflix" class="img-producto">
       <h3>Netflix</h3>
-      <p>5$ BCV</p>
+      <p data-precio="5">$5 USD</p>
     </div>
 
-    <div class="card-producto" data-name="Prime Video" data-price="3">
+    <!-- PRODUCTO 2 - PRIME VIDEO -->
+    <div class="card-producto">
       <img src="primevideo.png" alt="Prime Video" class="img-producto">
       <h3>Prime Video</h3>
-      <p>3$ BCV</p>
+      <p data-precio="3">$3 USD</p>
     </div>
 
-    <div class="card-producto" data-name="HBO Max" data-price="3">
+    <!-- PRODUCTO 3 - HBO MAX -->
+    <div class="card-producto">
       <img src="hbo.png" alt="HBO Max" class="img-producto">
       <h3>HBO Max</h3>
-      <p>3$ BCV</p>
+      <p data-precio="3">$3 USD</p>
     </div>
 
-    <div class="card-producto" data-name="Crunchyroll" data-price="3">
+    <!-- PRODUCTO 4 - CRUNCHYROLL -->
+    <div class="card-producto">
       <img src="crunchyroll.png" alt="Crunchyroll" class="img-producto">
       <h3>Crunchyroll</h3>
-      <p>3$ BCV</p>
+      <p data-precio="3">$3 USD</p>
     </div>
 
-    <div class="card-producto" data-name="Paramount+" data-price="2.5">
+    <!-- PRODUCTO 5 - PARAMOUNT+ -->
+    <div class="card-producto">
       <img src="paramount.png" alt="Paramount+" class="img-producto">
       <h3>Paramount+</h3>
-      <p>2.5$ BCV</p>
+      <p data-precio="2.5">$2.5 USD</p>
     </div>
 
-    <div class="card-producto" data-name="Vix Premium" data-price="2.5">
+    <!-- PRODUCTO 6 - VIX PREMIUM -->
+    <div class="card-producto">
       <img src="vix.png" alt="Vix Premium" class="img-producto">
       <h3>Vix Premium</h3>
-      <p>2.5$ BCV</p>
+      <p data-precio="2.5">$2.5 USD</p>
     </div>
 
   </div>
 
+  <!-- TOTAL -->
   <div class="total-box">
-    <h3>Total: $<span id="total">0</span> BCV</h3>
-<p class="tasa-bcv">
-  Tasa BCV del dólar: <span id="valorBCV">405.351</span> Bs
-</p>
-   <a id="whatsappBtn" target="_blank">
-  <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
-</a></div>
-
+    <h3>Total: $<span id="total">0</span> USD</h3>
+    <p>Total en Bs: <span id="totalBs">0</span> Bs</p>
+    <p class="tasa-bcv">Tasa BCV del dólar: <span id="valorBCV">405.351</span> Bs</p>
+    <a id="whatsappBtn" target="_blank" href="https://wa.me/1234567890?text=Hola">
+      <i class="fab fa-whatsapp"></i> Comprar por WhatsApp
+    </a>
+    <button id="resetBtn" class="boton-futuro" style="margin-top:20px;">Reset</button>
+  </div>
 </section>
 
+<!-- JAVASCRIPT PARA SUMA + TOGGLE + RESET -->
+<script>
+let total = 0;
+const tasaBCV = parseFloat(document.getElementById("valorBCV").textContent);
+
+const totalElement = document.getElementById("total");
+const totalBsElement = document.getElementById("totalBs");
+const resetBtn = document.getElementById("resetBtn");
+
+const productos = document.querySelectorAll(".card-producto");
+
+productos.forEach(producto => {
+  producto.addEventListener("click", function() {
+    const p = producto.querySelector("p[data-precio]");
+    if (!p) return;
+    const precio = parseFloat(p.dataset.precio);
+    if (isNaN(precio)) return;
+
+    // Toggle: suma o resta
+    if (producto.classList.contains("active")) {
+      total -= precio;
+      producto.classList.remove("active");
+    } else {
+      total += precio;
+      producto.classList.add("active");
+    }
+
+    totalElement.textContent = total.toFixed(2);
+    totalBsElement.textContent = (total * tasaBCV).toFixed(2);
+  });
+});
+
+// Botón Reset
+resetBtn.addEventListener("click", function() {
+  total = 0;
+  totalElement.textContent = total.toFixed(2);
+  totalBsElement.textContent = (total * tasaBCV).toFixed(2);
+  productos.forEach(p => p.classList.remove("active"));
+});
+</script>
 
 
 <script>

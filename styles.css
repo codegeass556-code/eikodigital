@@ -460,3 +460,10 @@ MEJORAS SOLO PARA MÓVIL
   color: #00ffcc;
   text-shadow: 0 0 6px #00ffcc;
 }
+
+.total-bs {
+  margin-top: 6px;
+  font-weight: bold;
+  color: #00ff88;
+  text-shadow: 0 0 6px #00ff88;
+}
