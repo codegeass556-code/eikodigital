@@ -482,3 +482,25 @@ MEJORAS SOLO PARA MÓVIL
   color: #00ff88;
   text-shadow: 0 0 6px #00ff88;
 }
+
+/* =========================
+   IMÁGENES HERO RESPONSIVE
+========================= */
+
+/* Por defecto (PC) */
+.hero-mobile {
+  display: none;
+}
+
+/* En móvil */
+@media screen and (max-width: 768px) {
+
+  .hero-pc {
+    display: none;
+  }
+
+  .hero-mobile {
+    display: block;
+  }
+
+}
