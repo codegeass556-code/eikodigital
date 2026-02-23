@@ -483,20 +483,10 @@ MEJORAS SOLO PARA MÓVIL
   text-shadow: 0 0 6px #00ff88;
 }
 
-/* =========================
-   IMÁGENES HERO RESPONSIVE
-========================= */
-
-/* Por defecto (PC) */
-.hero-mobile {
-  display: none;
-}
-
-(max-width: 768px) {
-
-  .hero-mobile {
-    object-fit: contain;
-    background-color: #0b0b12; /* opcional para que no se vea vacío */
-  }
-
+.hero-rect picture,
+.hero-rect img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
